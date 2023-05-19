@@ -7,22 +7,47 @@ let package = Package(
     name: "BenchmarkThreadSafeStrunctures",
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
-            name: "BenchmarkThreadSafeStrunctures",
-            targets: ["BenchmarkThreadSafeStrunctures"]),
+        .executable(
+            name: "ImplWrapper",
+            targets: ["ImplWrapper"]),
+        .executable(
+            name: "ImplWrapper2",
+            targets: ["ImplWrapper2"]),
+        .executable(
+            name: "ThreadSafeDict",
+            targets: ["ThreadSafeDict"]),
+        .executable(
+            name: "AtomicThreadSafety",
+            targets: ["AtomicThreadSafety"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        .package(url: "https://github.com/apple/swift-collections-benchmark", from: "0.0.3"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "BenchmarkThreadSafeStrunctures",
-            dependencies: []),
-        .testTarget(
-            name: "BenchmarkThreadSafeStruncturesTests",
-            dependencies: ["BenchmarkThreadSafeStrunctures"]),
+//        .target(
+//            name: "BenchmarkThreadSafeStrunctures",
+//            dependencies: [])
+        .executableTarget(
+            name: "ImplWrapper",
+            dependencies: [.product(name: "CollectionsBenchmark", package: "swift-collections-benchmark")]),
+        
+        .executableTarget(
+            name: "ImplWrapper2",
+            dependencies: [.product(name: "CollectionsBenchmark", package: "swift-collections-benchmark")]),
+        
+        .executableTarget(
+            name: "ThreadSafeDict",
+            dependencies: [.product(name: "CollectionsBenchmark", package: "swift-collections-benchmark")]),
+        
+        .executableTarget(
+            name: "ThreadSafeAtomicProperty",
+            dependencies: [.product(name: "CollectionsBenchmark", package: "swift-collections-benchmark")]),
+        
+        .executableTarget(
+            name: "AtomicThreadSafety",
+            dependencies: [.product(name: "CollectionsBenchmark", package: "swift-collections-benchmark")])
+
     ]
 )
